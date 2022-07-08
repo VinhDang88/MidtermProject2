@@ -25,15 +25,5 @@ namespace MidtermProject
         {
             return $"{Name} {Category} {Description} {Price}";
         }
-
-        public static int ShoppingList(List<Product> myList)
-        {
-            int i = 0;
-            for (i = 0; i < myList.Count(); i++)
-            {
-                Console.WriteLine($"{i + 1}: {myList[i]}");
-            }
-            return i;
-        }
     }
 }
