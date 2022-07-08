@@ -1,9 +1,9 @@
 ﻿using MidtermProject;
 
+int choice = 0;  // menu item they want 
 bool keepShopping = true;           // loop to use while user shops 
-List <Product> shoppingCart = new List <Product> ();    // user's "cart" 
 
-
+List<Product> shoppingCart = new List<Product>();    // user's "cart" 
 //Product List 
 List<Product> shoppingList = new List<Product>()
 {
@@ -21,30 +21,59 @@ List<Product> shoppingList = new List<Product>()
     new Product ("Mochi", "Frozen", "", 3.89),
 };
 
-Console.WriteLine("Welcome to Trader Jose's! \nHere is our current menu:"); 
+Console.WriteLine("Welcome to Trader Jose's! \nHere is our current menu:");
 
 //DISPLAY LIST 
 ShowShoppingList(shoppingList);
 
-// set up a loop to let the user "shop" 
-//while (keepShopping) 
-//{ 
+// get what item they want 
+choice = 0;
+
+// decide how many to add 
+int quantityOfItem = ChooseQuantity();
+static int ChooseQuantity()  // int x is userFoodInput/userChoice for now
+{
+    int quantity = 0;
+    while (true)
+    {
+
+        Console.WriteLine("How many do you want?");
+        while (!int.TryParse(Console.ReadLine(), out quantity))
+        {
+            Console.WriteLine("Not a valid input. Try again");
+        }
+        if (quantity < 1)
+        {
+            Console.WriteLine("Not valid choices");
+        }
+        else
+        {
+            //valid input
+            break;
+        }
+    }
+    return quantity;
+}
 
 
-// has to be a method to remove last item from a list; idea to for an "undo" option
-// idea: "hit 0 to display the menu again" 
+// add item and quantity to shoppingCart list we made 
 
-//}
+for (int i = 0; i <= quantityOfItem; i++) // make sure correct # is added.... 
+{
+
+    shoppingCart.Add(shoppingList[choice - 1]);
+}
+
+// Ask if they want to keep shopping.... 
 
 
 
-
-
+// if not...
 // user will be out of keepShopping loop when they get to this point 
 
-Console.WriteLine("How would you like to pay?\n 1.CC \n2. Check\n 3. Cash "); 
-string input = Console.ReadLine().ToLower().Trim(); 
-if (input.Contains("1") || input.Contains("credit")) 
+Console.WriteLine("How would you like to pay?\n 1.CC \n2. Check\n 3. Cash ");
+string input = Console.ReadLine().ToLower().Trim();
+if (input.Contains("1") || input.Contains("credit"))
 {
     // PayByCC()
 }
@@ -60,9 +89,9 @@ else
 {
     Console.WriteLine("please fix your input");
 }
-// Loop????
 
-//method to display the list 
+// ^ that needs to be looped 
+
 
 static void ShowShoppingList(List<Product> myList)
 {
@@ -73,3 +102,16 @@ static void ShowShoppingList(List<Product> myList)
     }
 
 }
+
+
+
+
+
+//static int ChooseItem()
+//{
+
+//    // returns the list item # that user wants 
+//    // will need to return choice - 1 to get list index :] 
+//}
+
+
