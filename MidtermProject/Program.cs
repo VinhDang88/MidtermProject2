@@ -80,15 +80,15 @@ Console.WriteLine("How would you like to pay?\n1. CC \n2. Check\n3. Cash ");
 string input = Console.ReadLine().ToLower().Trim();
 if (input.Contains("1") || input.Contains("credit"))
 {
-    // PayByCC()
+    Transaction.PayByCC();
 }
 else if (input.Contains("2") || input.Contains("check"))
 {
-    // PayByCheck
+    Transaction.PayByCheck();
 }
 else if (input.Contains("3") || input.Contains("cash"))
 {
-    //PayCash 
+    //Cash
 }
 else
 {
