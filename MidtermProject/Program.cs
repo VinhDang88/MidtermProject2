@@ -3,7 +3,10 @@
 int quantityOfItem = 0;
 int userChoice = 0;  // menu item they want 
 bool keepShopping = true;           // loop to use while user shops 
+bool checkout = true;
 double total = 0;
+const double taxRate = 0.06;
+double grandTotal = 0;
 
 List<Product> shoppingCart = new List<Product>();    // user's "cart" 
 //Product List 
@@ -72,30 +75,44 @@ foreach (Product uniqueItem in uniqueItems)
 }
 
 //display total 
-Console.WriteLine($" Your total is ${Math.Round(total, 2)}\n");
+Console.WriteLine($"Your item total is ${Math.Round(total, 2)}\n");
+Console.WriteLine($"Tax: ${Math.Round(total * taxRate, 2)}");
+
+grandTotal = Transaction.GrandTotal(total, taxRate);
+Console.WriteLine($"Grand Total: ${grandTotal}");
+
+//time to pay
+
+while (checkout)
+{
+    Console.WriteLine("How would you like to pay?\n1. CC \n2. Check\n3. Cash ");
+    string input = Console.ReadLine().ToLower().Trim();
+    if (input.Contains("1") || input.Contains("credit"))
+    {
+        Transaction.PayByCC();
+        checkout = false;
+    }
+    else if (input.Contains("2") || input.Contains("check"))
+    {
+        Transaction.PayByCheck();
+        checkout = false;
+    }
+    else if (input.Contains("3") || input.Contains("cash"))
+    {
+        Transaction.PayCash(grandTotal);
+        checkout = false;
+    }
+    else
+    {
+        Console.WriteLine("please fix your input");
+
+    }
+}
 
 
 
-Console.WriteLine("How would you like to pay?\n1. CC \n2. Check\n3. Cash ");
-string input = Console.ReadLine().ToLower().Trim();
-if (input.Contains("1") || input.Contains("credit"))
-{
-    Transaction.PayByCC();
-}
-else if (input.Contains("2") || input.Contains("check"))
-{
-    Transaction.PayByCheck();
-}
-else if (input.Contains("3") || input.Contains("cash"))
-{
-    //Cash
-}
-else
-{
-    Console.WriteLine("please fix your input");
-}
-
-// ^ that needs to be looped 
+//just making sure we can get to this point:
+Console.WriteLine("payment accepted"); 
 
 
 //methods 

@@ -13,11 +13,39 @@ namespace MidtermProject
         public static List<Product> shoppingList2; // just a copy of "shoppingLlist" for functionality. 
 
         // this will be for all things billing, checking out, etc 
-        public double PayCash(int total, int money)
+
+        public static double GrandTotal(double total, double taxRate)
         {
-            double change = money - total;
+            double grandTotal = Math.Round((total + (taxRate * total)), 2);
+
+            return grandTotal;
+        }
+
+
+        public static double PayCash(double grandTotal)
+        {
+            double money = 0;
+            while (true)
+            {
+                Console.WriteLine("Please input cash amount: ");
+                while (!double.TryParse(Console.ReadLine(), out money))
+                {
+                    Console.WriteLine("Not a valid input. Try again");
+                }
+                if (money < grandTotal)
+                {
+                    Console.WriteLine("Insufficient funds - please try again");
+                }
+                else
+                {
+                    break;
+                }
+            }
+            double change = money - grandTotal;
+            Console.WriteLine($"Thank you!\nYour change is: ${Math.Round(change, 2)}."); // should this be here?
             return change;
         }
+    
 
         public static void PayByCheck()
         {
