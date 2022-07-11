@@ -63,6 +63,7 @@ namespace MidtermProject
         {
             Regex viasRegEx = new Regex(@"^4[0-9]{12}(?:[0-9]{3})?$");
             Regex americanExpressRegEx = new Regex(@"^3[47][0-9]{13}$");
+            Regex masterCard = new Regex(@"^5[1-5][0-9]{14}$");
             Regex monthYear = new Regex(@"^(0[1-9]|1[0-2])\/?([0-9]{2})$");
             Regex cvv = new Regex(@"^[0-9]{3,4}$");
             while (true)
