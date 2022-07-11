@@ -96,7 +96,8 @@ namespace MidtermProject
         {
             while (true)
             {
-                Console.WriteLine("Would you like to continue shopping? Press Y to continue shopping, or N to go to check out.");
+                Console.WriteLine("Would you like to continue shopping? Press Y to continue shopping, or N to go to check out. " +
+                    "You can reply with 'menu' to see our available options again.");
                 string checkOut = Console.ReadLine().ToLower().Trim();
 
                 if (checkOut == "y")
