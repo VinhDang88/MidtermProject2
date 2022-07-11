@@ -82,7 +82,6 @@ grandTotal = Transaction.GrandTotal(total, taxRate);
 Console.WriteLine($"Grand Total: ${grandTotal}");
 
 //time to pay
-
 while (checkout)
 {
     Console.WriteLine("How would you like to pay?\n1. CC \n2. Check\n3. Cash ");
@@ -112,7 +111,7 @@ while (checkout)
 
 
 //just making sure we can get to this point:
-Console.WriteLine("payment accepted"); 
+Console.WriteLine("Thank you! Payment has been accepted."); 
 
 
 //methods 

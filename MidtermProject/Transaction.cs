@@ -83,6 +83,11 @@ namespace MidtermProject
                     break;
 
                 }
+                else if (Regex.IsMatch(creditCard, @"^5[1-5][0-9]{14}$"))
+                {
+                    Console.WriteLine("Mastercard");
+                    break;
+                }
                 else
                 {
                     Console.WriteLine("NOT ACCEPTED");
