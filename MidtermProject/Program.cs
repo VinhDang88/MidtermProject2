@@ -42,18 +42,16 @@ while (keepShopping)
 
     for (int i = 0; i < quantityOfItem; i++) // make sure correct # is added.... 
     {
-        shoppingCart.Add(shoppingList[userChoice - 1]);
+        shoppingCart.Add(shoppingList[userChoice]);
     }
+
+    //line total 
+    Console.WriteLine($"Added {quantityOfItem} {shoppingList[userChoice].Name} for ${Math.Round(shoppingList[userChoice].Price * quantityOfItem, 2)} ");
+
 
     // Ask if they want to keep shopping.... 
     keepShopping = Transaction.ContinueShopping();
-
 }
-
-
-// user will be out of keepShopping loop when they get to this point 
-
-Console.WriteLine();  // adding space 
 
 // calculate the total of all items in shopping cart, accounting for all duplicates 
 foreach (Product product in shoppingCart)
@@ -62,15 +60,18 @@ foreach (Product product in shoppingCart)
 
 }
 
+//unique items 
+List<Product> uniqueItems = shoppingCart.DistinctBy(item => item.Name).ToList();
+
+//time to COUNT the unique items 
+foreach (Product uniqueItem in uniqueItems)
+{
+    int quantity = shoppingCart.Where(item => (item.Name).Equals(uniqueItem.Name)).Count();
+    Console.WriteLine($"{quantity} x {uniqueItem.Name} - ${uniqueItem.Price} each");
+}
+
 //display total 
 Console.WriteLine($" Your total is ${Math.Round(total, 2)}\n");
-
-//testingggg testing, write out full list to make sure everything is there 
-// don't want to use this in the final code, need to display unique items better 
-foreach (Product product in shoppingCart)
-{
-    Console.WriteLine(product);
-}
 
 
 
@@ -110,7 +111,7 @@ static void ShowShoppingList(List<Product> myList)
 
 static int ChooseItem(List<Product> list)
 {
-    int choice = 0;
+    int choice = -1;
     while (true)
     {
         //added a space before this line
@@ -125,6 +126,7 @@ static int ChooseItem(List<Product> list)
         }
         else
         {
+            choice--;
             //valid input
             break;
         }
