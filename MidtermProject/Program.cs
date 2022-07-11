@@ -75,7 +75,7 @@ Console.WriteLine($" Your total is ${Math.Round(total, 2)}\n");
 
 
 
-Console.WriteLine("How would you like to pay?\n1.CC \n2. Check\n3. Cash ");
+Console.WriteLine("How would you like to pay?\n1. CC \n2. Check\n3. Cash ");
 string input = Console.ReadLine().ToLower().Trim();
 if (input.Contains("1") || input.Contains("credit"))
 {
