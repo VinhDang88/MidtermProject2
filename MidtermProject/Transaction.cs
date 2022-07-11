@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MidtermProject
 {
-
     // this will be for all things billing, checking out, etc 
-
     internal class Transaction
     {
+        public static List<Product> shoppingList2; // just a copy of "shoppingLlist" for functionality. 
+
         // this will be for all things billing, checking out, etc 
         public double PayCash(int total, int money)
         {
@@ -92,7 +92,7 @@ namespace MidtermProject
                 }
             }
         }
-            public static bool ContinueShopping() // just an option to have if we want 
+        public static bool ContinueShopping() // just an option to have if we want 
         {
             while (true)
             {
@@ -108,6 +108,10 @@ namespace MidtermProject
                 {
                     return false; // will set keepShopping bool to "false"
                 }
+                else if (checkOut == "menu")
+                {
+                    ShowShoppingList();
+                }
                 else
                 {
                     Console.WriteLine("Invalid input");
@@ -116,36 +120,18 @@ namespace MidtermProject
             }
             return true;
         }
+        static void ShowShoppingList()
+        {
+            int i = 0;
+            for (i = 0; i < shoppingList2.Count(); i++)
+            {
+                Console.WriteLine(string.Format("{0,3}: {1}", i + 1, shoppingList2[i]));
+            }
+
+        }
+
+
     }
 }
 
-
-
-
-
-//NOT USING, old method for quantity 
-
-//static int ChooseQuantity(List<Product> list, int x)  // int x is userFoodInput/userChoice for now
-//{
-//    int quantity = 0;
-//    while (true)
-//    {
-
-//        Console.WriteLine("How many do you want?");
-//        while (!int.TryParse(Console.ReadLine(), out quantity))
-//        {
-//            Console.WriteLine("Not a valid input. Try again");
-//        }
-//        if (quantity < 1)
-//        {
-//            Console.WriteLine("Not valid choices");
-//        }
-//        else
-//        {
-//            //valid input
-//            break;
-//        }
-//    }
-//    return quantity;
-//}
 

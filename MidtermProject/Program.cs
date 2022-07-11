@@ -23,6 +23,7 @@ List<Product> shoppingList = new List<Product>()
     new Product ("Hash Browns", "Frozen", "All the flavor, none of the work", 2.99),
     new Product ("Mochi", "Frozen", "Sweet rice dough", 3.89),
 };
+Transaction.shoppingList2 = shoppingList; // send store list over to Transaction.cs 
 
 Console.WriteLine("Welcome to Trader Jose's! \nHere is our current menu:");
 Console.WriteLine("- - - - - - - - - - - - - ");
