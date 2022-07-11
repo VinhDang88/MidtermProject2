@@ -9,18 +9,19 @@ List<Product> shoppingCart = new List<Product>();    // user's "cart"
 //Product List 
 List<Product> shoppingList = new List<Product>()
 {
-    new Product ("Mandarin Orange Chicken", "Frozen", "Delicious", 4.99),
-    new Product ("Butter Waffle Cookies", "Snacks", "Tangy", 2.99),
-    new Product ("Candied Mango", "Snacks", "", 2.99),
-    new Product ("Jasmine Rice", "Frozen", "", 3.99),
-    new Product ("Green Goddess Salad Dressing", "Produce", "", 2.49),
-    new Product ("Organic Baby Lettuce Mix", "Produce", "", 2.49),
-    new Product ("Organic Chicken Nuggets", "", "", 4.99),
-    new Product ("BBQ Teriyaki Chicken", "", "", 5.49),
-    new Product ("Cashew Butter Cashews", "Snacks", "", 4.99),
-    new Product ("Seasoned Waffle Fries", "Frozen", "", 3.49),
-    new Product ("Hash Browns", "Frozen", "", 2.99),
-    new Product ("Mochi", "Frozen", "", 3.89),
+    //updated descriptions - KP
+    new Product ("Mandarin Orange Chicken", "Frozen", "Quick and easy meal that serves 4-5", 4.99),
+    new Product ("Butter Waffle Cookies", "Snacks", "Great sweet treat for any time of the day", 2.99),
+    new Product ("Candied Mango", "Snacks", "The great taste of mango without all the work", 2.99),
+    new Product ("Jasmine Rice", "Frozen", "Microwave perfect in 3 minutes", 3.99),
+    new Product ("Green Goddess Salad Dressing", "Produce", "Packed with Hass avocados, fresh herbs, and seasonings", 2.49),
+    new Product ("Organic Baby Lettuce Mix", "Produce", "It's better than iceberg lettuce", 2.49),
+    new Product ("Organic Chicken Nuggets", "Frozen", "Organic, fully-cooked, fresh-food", 4.99),
+    new Product ("BBQ Teriyaki Chicken", "Frozen", "BBQ dark meat chicken in teriyaki sauce", 5.49),
+    new Product ("Cashew Butter Cashews", "Snacks", "Cashew butter on cashews, enough said", 4.99),
+    new Product ("Seasoned Waffle Fries", "Frozen", "The best type of fry", 3.49),
+    new Product ("Hash Browns", "Frozen", "All the flavor, none of the work", 2.99),
+    new Product ("Mochi", "Frozen", "Sweet rice dough", 3.89),
 };
 
 Console.WriteLine("Welcome to Trader Jose's! \nHere is our current menu:");
@@ -101,7 +102,8 @@ static void ShowShoppingList(List<Product> myList)
     int i = 0;
     for (i = 0; i < myList.Count(); i++)
     {
-        Console.WriteLine($"{i + 1}: {myList[i]}");
+        //updated string format - KP
+        Console.WriteLine(string.Format("{0,3}: {1}", i + 1, myList[i]));
     }
 
 }
@@ -111,8 +113,8 @@ static int ChooseItem(List<Product> list)
     int choice = 0;
     while (true)
     {
-
-        Console.WriteLine("Please make a selection from the menu list.");
+        //added a space before this line
+        Console.WriteLine($"\nPlease make a selection from the menu list.");
         while (!int.TryParse(Console.ReadLine(), out choice))
         {
             Console.WriteLine("Not a valid input. Try again");

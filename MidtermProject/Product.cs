@@ -23,7 +23,7 @@ namespace MidtermProject
         }
         public override string ToString()
         {
-            return $"{Name} {Category} {Description} {Price}";
+            return string.Format("{0,-30} {1,-10} {2,-55} {3,-5}", $"{Name}", $"{Category}", $"{Description}", $"${Price}");
         }
     }
 }
