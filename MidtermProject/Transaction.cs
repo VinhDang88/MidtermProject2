@@ -10,7 +10,7 @@ namespace MidtermProject
     // this will be for all things billing, checking out, etc 
     internal class Transaction
     {
-        public static List<Product> shoppingList2; // just a copy of "shoppingLlist" for functionality. 
+        public static List<Product>? shoppingList2; // just a copy of "shoppingLlist" for functionality. 
 
         // this will be for all things billing, checking out, etc 
 
@@ -44,9 +44,9 @@ namespace MidtermProject
             double change = Math.Round(money - grandTotal, 2);
             Console.WriteLine($"Thank you!\nYour change is: ${change}.");
             return change;
-        
-    }
-    
+
+        }
+
 
         public static void PayByCheck()
         {
@@ -62,11 +62,11 @@ namespace MidtermProject
         }
         public static void PayByCC()
         {
-            Regex viasRegEx = new Regex(@"^4[0-9]{12}(?:[0-9]{3})?$");
-            Regex americanExpressRegEx = new Regex(@"^3[47][0-9]{13}$");
-            Regex masterCard = new Regex(@"^5[1-5][0-9]{14}$");
-            Regex monthYear = new Regex(@"^(0[1-9]|1[0-2])\/?([0-9]{2})$");
-            Regex cvv = new Regex(@"^[0-9]{3,4}$");
+            //Regex visaRegEx = new(@"^4[0-9]{12}(?:[0-9]{3})?$");
+            //Regex americanExpressRegEx = new(@"^3[47][0-9]{13}$");
+            //Regex masterCard = new(@"^5[1-5][0-9]{14}$");
+            //Regex monthYear = new(@"^(0[1-9]|1[0-2])\/?([0-9]{2})$");
+            //Regex cvv = new(@"^[0-9]{3,4}$");
             while (true)
             {
                 Console.WriteLine("Please enter a credit card number.");
@@ -76,7 +76,6 @@ namespace MidtermProject
                 {
                     Console.WriteLine("VISA");
                     break;
-
                 }
 
                 else if (Regex.IsMatch(creditCard, @"^3[47][0-9]{13}$"))
@@ -104,7 +103,6 @@ namespace MidtermProject
                 {
                     Console.WriteLine("Valid");
                     break;
-
                 }
                 else
                 {
@@ -131,8 +129,8 @@ namespace MidtermProject
         {
             while (true)
             {
-                Console.WriteLine("Would you like to continue shopping? Press Y to continue shopping, or N to go to check out. " +
-                    "You can reply with 'menu' to see our available options again.");
+                Console.WriteLine("Would you like to continue shopping? Press Y to continue shopping, or N to go to check out." +
+                    "\nYou can reply with 'menu' to see our available options again.");
                 string checkOut = Console.ReadLine().ToLower().Trim();
 
                 if (checkOut == "y")
@@ -171,12 +169,11 @@ namespace MidtermProject
 
         // this is a method because we didn't want this massive code block in main program. 
         {
-            Console.WriteLine(String.Format("{0,50}", "TRADER JOES"));
+            Console.WriteLine(String.Format("{0,50}", "TRADER JOSES"));
             Console.WriteLine(String.Format("{0,53}", "27880 Woodward Ave"));
             Console.WriteLine(String.Format("{0,53}", "Royal Oak, MI 48067"));
             Console.WriteLine(String.Format("{0,57}", "Store #690 - (248) 582-9002\n"));
             Console.WriteLine(String.Format("{0,58}", "OPEN 8:00AM TO 10:00PM DAILY\n"));
-            //Console.WriteLine(String.Format($"{0,58}", "{ now }"));
             Console.WriteLine(now);
             Console.WriteLine("Items Purchased:\n...........................");
             foreach (Product uniqueItem in uniqueList)
@@ -193,11 +190,9 @@ namespace MidtermProject
             }
 
             Console.WriteLine(String.Format("{0,53}", "THANK YOU FOR SHOPPING AT"));
-            Console.WriteLine(String.Format("{0,46}", "TRADER JOE'S"));
-            Console.WriteLine(String.Format("{0,49}", "www.traderjoes.com"));
+            Console.WriteLine(String.Format("{0,46}", "TRADER JOSE'S"));
+            Console.WriteLine(String.Format("{0,49}", "www.traderjoses.com"));
         }
-
-
     }
 }
 
