@@ -1,4 +1,6 @@
-﻿using MidtermProject;
+﻿//written by Kris, Vinh and Mara 
+
+using MidtermProject;
 
 bool runProgram = true;
 int quantityOfItem, userChoice = 0;
