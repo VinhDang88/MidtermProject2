@@ -81,6 +81,7 @@ namespace MidtermProject
 
                 if (Regex.IsMatch(creditCard, @"^4[0-9]{12}(?:[0-9]{3})?$"))
                 {
+                    Console.WriteLine("VISA");
                     lastFour = $"x{creditCard.Substring(creditCard.Length - 4)} - VISA";
                     break;
 
@@ -88,6 +89,7 @@ namespace MidtermProject
 
                 else if (Regex.IsMatch(creditCard, @"^3[47][0-9]{13}$"))
                 {
+                    Console.WriteLine("AMEX");
                     lastFour = $"x{creditCard.Substring(creditCard.Length - 4)} - AMEX";
                     break;
 
@@ -97,6 +99,7 @@ namespace MidtermProject
                 }
                 else if (Regex.IsMatch(creditCard, @"^5[1-5][0-9]{14}$"))
                 {
+                    Console.WriteLine("MASTERCARD");
                     lastFour = $"x{creditCard.Substring(creditCard.Length - 4)} - MASTERCARD";
                     break;
 
