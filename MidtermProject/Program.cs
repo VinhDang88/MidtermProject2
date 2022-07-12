@@ -1,18 +1,21 @@
 ﻿using MidtermProject;
 
-int quantityOfItem = 0;
-int userChoice = 0;  // menu item they want 
+bool runProgram = true;
+int quantityOfItem, userChoice = 0;
+//int userChoice = 0;  // menu item they want 
 bool keepShopping = true;           // loop to use while user shops 
 bool checkout = true;
 double total = 0;
 const double taxRate = 0.06;
 double grandTotal = 0;
+var now = DateTime.Now;
+string paymentMethod = "";
+double change = 0;
 
 List<Product> shoppingCart = new List<Product>();    // user's "cart" 
-//Product List 
+
 List<Product> shoppingList = new List<Product>()
 {
-    //updated descriptions - KP
     new Product ("Mandarin Orange Chicken", "Frozen", "Quick and easy meal that serves 4-5", 4.99),
     new Product ("Butter Waffle Cookies", "Snacks", "Great sweet treat for any time of the day", 2.99),
     new Product ("Candied Mango", "Snacks", "The great taste of mango without all the work", 2.99),
@@ -26,7 +29,9 @@ List<Product> shoppingList = new List<Product>()
     new Product ("Hash Browns", "Frozen", "All the flavor, none of the work", 2.99),
     new Product ("Mochi", "Frozen", "Sweet rice dough", 3.89),
 };
+
 Transaction.shoppingList2 = shoppingList; // send store list over to Transaction.cs 
+
 
 Console.WriteLine("Welcome to Trader Jose's! \nHere is our current menu:");
 Console.WriteLine("- - - - - - - - - - - - - ");
@@ -52,7 +57,6 @@ while (keepShopping)
     //line total 
     Console.WriteLine($"Added {quantityOfItem} {shoppingList[userChoice].Name} for ${Math.Round(shoppingList[userChoice].Price * quantityOfItem, 2)} ");
 
-
     // Ask if they want to keep shopping.... 
     keepShopping = Transaction.ContinueShopping();
 }
@@ -64,10 +68,13 @@ foreach (Product product in shoppingCart)
 
 }
 
+total = Math.Round(total, 2);
+
 //unique items 
 List<Product> uniqueItems = shoppingCart.DistinctBy(item => item.Name).ToList();
 
 //time to COUNT the unique items 
+Console.WriteLine("\nCart ready for checkout:\n........................");
 foreach (Product uniqueItem in uniqueItems)
 {
     int quantity = shoppingCart.Where(item => (item.Name).Equals(uniqueItem.Name)).Count();
@@ -75,43 +82,49 @@ foreach (Product uniqueItem in uniqueItems)
 }
 
 //display total 
-Console.WriteLine($"Your item total is ${Math.Round(total, 2)}\n");
-Console.WriteLine($"Tax: ${Math.Round(total * taxRate, 2)}");
-
+double tax = Math.Round((taxRate * total), 2);
 grandTotal = Transaction.GrandTotal(total, taxRate);
-Console.WriteLine($"Grand Total: ${grandTotal}");
 
-//time to pay
+Console.WriteLine($"\nYour item total is ${total}.");
+Console.WriteLine($"Tax: ${tax}\nGrand Total: ${grandTotal}\n");
+
+
+
 while (checkout)
 {
-    Console.WriteLine("How would you like to pay?\n1. CC \n2. Check\n3. Cash ");
+    Console.WriteLine("How would you like to pay? (Select Number)\n1. CC (Amex, Visa, MC) \n2. Check\n3. Cash ");
     string input = Console.ReadLine().ToLower().Trim();
     if (input.Contains("1") || input.Contains("credit"))
     {
+        paymentMethod = "Credit Card";
         Transaction.PayByCC();
         checkout = false;
     }
     else if (input.Contains("2") || input.Contains("check"))
     {
+        paymentMethod = "Check";
         Transaction.PayByCheck();
         checkout = false;
     }
     else if (input.Contains("3") || input.Contains("cash"))
     {
-        Transaction.PayCash(grandTotal);
+        paymentMethod = "Cash";
+        change = Transaction.PayCash(grandTotal);
         checkout = false;
     }
     else
     {
-        Console.WriteLine("please fix your input");
+        Console.WriteLine("Please choose a valid option.");
 
     }
 }
 
+Console.WriteLine("\nThank you! Payment has been accepted.");
 
+Console.WriteLine("Here's your receipt.\n\n");
 
-//just making sure we can get to this point:
-Console.WriteLine("Thank you! Payment has been accepted."); 
+//just having fun with this method 
+Transaction.PrintReceipt(total, tax, grandTotal, uniqueItems, shoppingCart, now, paymentMethod, change);
 
 
 //methods 

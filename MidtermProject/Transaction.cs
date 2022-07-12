@@ -41,10 +41,11 @@ namespace MidtermProject
                     break;
                 }
             }
-            double change = money - grandTotal;
-            Console.WriteLine($"Thank you!\nYour change is: ${Math.Round(change, 2)}."); // should this be here?
+            double change = Math.Round(money - grandTotal, 2);
+            Console.WriteLine($"Thank you!\nYour change is: ${change}.");
             return change;
-        }
+        
+    }
     
 
         public static void PayByCheck()
@@ -163,6 +164,37 @@ namespace MidtermProject
                 Console.WriteLine(string.Format("{0,3}: {1}", i + 1, shoppingList2[i]));
             }
 
+        }
+
+        public static void PrintReceipt(double total, double tax, double grandTotal,
+           List<Product> uniqueList, List<Product> shoppingCart, DateTime now, string paymentMethod, double change)
+
+        // this is a method because we didn't want this massive code block in main program. 
+        {
+            Console.WriteLine(String.Format("{0,50}", "TRADER JOES"));
+            Console.WriteLine(String.Format("{0,53}", "27880 Woodward Ave"));
+            Console.WriteLine(String.Format("{0,53}", "Royal Oak, MI 48067"));
+            Console.WriteLine(String.Format("{0,57}", "Store #690 - (248) 582-9002\n"));
+            Console.WriteLine(String.Format("{0,58}", "OPEN 8:00AM TO 10:00PM DAILY\n"));
+            //Console.WriteLine(String.Format($"{0,58}", "{ now }"));
+            Console.WriteLine(now);
+            Console.WriteLine("Items Purchased:\n...........................");
+            foreach (Product uniqueItem in uniqueList)
+            {
+                int quantity = shoppingCart.Where(item => (item.Name).Equals(uniqueItem.Name)).Count();
+                Console.WriteLine($"{quantity} x {uniqueItem.Name} - ${uniqueItem.Price} each");
+            }
+            Console.WriteLine($"\nTotal: ${total}\nTax: ${tax}\nGrand Total: ${grandTotal}");
+            Console.WriteLine($"Payment Method accepted: {paymentMethod}, {now}");
+
+            if (paymentMethod == "Cash")
+            {
+                Console.WriteLine($"Change: ${change}\n");
+            }
+
+            Console.WriteLine(String.Format("{0,53}", "THANK YOU FOR SHOPPING AT"));
+            Console.WriteLine(String.Format("{0,46}", "TRADER JOE'S"));
+            Console.WriteLine(String.Format("{0,49}", "www.traderjoes.com"));
         }
 
 
