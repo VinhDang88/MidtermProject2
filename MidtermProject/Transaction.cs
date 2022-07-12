@@ -129,9 +129,10 @@ namespace MidtermProject
         {
             while (true)
             {
-                Console.WriteLine("Would you like to continue shopping? Press Y to continue shopping, or N to go to check out." +
+                Console.WriteLine("\nWould you like to continue shopping? Press \"y\" to continue shopping, or \"n\" to go to check out." +
                     "\nYou can reply with 'menu' to see our available options again.");
                 string checkOut = Console.ReadLine().ToLower().Trim();
+                Console.WriteLine();
 
                 if (checkOut == "y")
                 {
@@ -169,7 +170,7 @@ namespace MidtermProject
 
         // this is a method because we didn't want this massive code block in main program. 
         {
-            Console.WriteLine(String.Format("{0,50}", "TRADER JOSES"));
+            Console.WriteLine(String.Format("{0,50}", "TRADER JOSE'S"));
             Console.WriteLine(String.Format("{0,53}", "27880 Woodward Ave"));
             Console.WriteLine(String.Format("{0,53}", "Royal Oak, MI 48067"));
             Console.WriteLine(String.Format("{0,57}", "Store #690 - (248) 582-9002\n"));
@@ -191,7 +192,7 @@ namespace MidtermProject
 
             Console.WriteLine(String.Format("{0,53}", "THANK YOU FOR SHOPPING AT"));
             Console.WriteLine(String.Format("{0,46}", "TRADER JOSE'S"));
-            Console.WriteLine(String.Format("{0,49}", "www.traderjoses.com"));
+            Console.WriteLine(String.Format("{0,49}", "www.traderjoses.com\n"));
         }
     }
 }

@@ -25,7 +25,7 @@ while (runProgram)
 {
     new Product ("Mandarin Orange Chicken", "Frozen", "Quick and easy meal that serves 4-5", 4.99),
     new Product ("Butter Waffle Cookies", "Snacks", "Great sweet treat for any time of the day", 2.99),
-    new Product ("Candied Mango", "Snacks", "The great taste of mango without all the work", 2.99),
+    new Product ("Candied Mango", "Snacks", "The great taste of mango without all fancy cutting", 2.99),
     new Product ("Jasmine Rice", "Frozen", "Microwave perfect in 3 minutes", 3.99),
     new Product ("Green Goddess Salad Dressing", "Produce", "Packed with Hass avocados, fresh herbs, and seasonings", 2.49),
     new Product ("Organic Baby Lettuce Mix", "Produce", "It's better than iceberg lettuce", 2.49),
@@ -51,7 +51,7 @@ while (runProgram)
         userChoice = ChooseItem(shoppingList);
 
         // decide how many to add 
-        quantityOfItem = ChooseQuantity();
+        quantityOfItem = ChooseQuantity(ref shoppingList, ref userChoice);
 
         // add item and quantity to shoppingCart list we made 
 
@@ -80,7 +80,7 @@ while (runProgram)
     List<Product> uniqueItems = shoppingCart.DistinctBy(item => item.Name).ToList();
 
     //time to COUNT the unique items 
-    Console.WriteLine("\nCart ready for checkout:\n........................");
+    Console.WriteLine("Cart ready for checkout:\n........................");
     foreach (Product uniqueItem in uniqueItems)
     {
         int quantity = shoppingCart.Where(item => (item.Name).Equals(uniqueItem.Name)).Count();
@@ -88,7 +88,7 @@ while (runProgram)
     }
 
     //display total 
-    double tax = Math.Round((taxRate * total), 2);
+    double tax = Math.Round(taxRate * total, 2);
     grandTotal = Transaction.GrandTotal(total, taxRate);
 
     Console.WriteLine($"\nYour item total is ${total}.");
@@ -96,8 +96,9 @@ while (runProgram)
 
     while (checkout)
     {
-        Console.WriteLine("How would you like to pay? (Select Number)\n1. CC (Amex, Visa, MC) \n2. Check\n3. Cash ");
+        Console.WriteLine("How would you like to pay? (Select Number)\n1. CC (Amex, Visa, MC) \n2. Check\n3. Cash");
         string input = Console.ReadLine().ToLower().Trim();
+        Console.WriteLine();
         if (input.Contains("1") || input.Contains("credit"))
         {
             paymentMethod = "Credit Card";
@@ -152,8 +153,7 @@ static int ChooseItem(List<Product> list)
     int choice = -1;
     while (true)
     {
-        //added a space before this line
-        Console.WriteLine($"\nPlease make a selection from the menu list.");
+        Console.WriteLine($"Please make a selection from the menu using the number next to the item you would like to add.");
         while (!int.TryParse(Console.ReadLine(), out choice))
         {
             Console.WriteLine("Not a valid input. Try again");
@@ -174,13 +174,12 @@ static int ChooseItem(List<Product> list)
     // will need to return choice - 1 to get list index :] 
 }
 
-static int ChooseQuantity()  // int x is userFoodInput/userChoice for now
+static int ChooseQuantity(ref List<Product> shoppingList, ref int userChoice) // int x is userFoodInput/userChoice for now
 {
     int quantity = 0;
     while (true)
     {
-
-        Console.WriteLine("How many do you want?");
+        Console.WriteLine($"How many {shoppingList[userChoice].Name} do you want?");
         while (!int.TryParse(Console.ReadLine(), out quantity))
         {
             Console.WriteLine("Not a valid input. Try again");
