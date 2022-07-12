@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,7 +17,7 @@ namespace MidtermProject
 
         public static double GrandTotal(double total, double taxRate)
         {
-            double grandTotal = Math.Round((total + (taxRate * total)), 2);
+            double grandTotal = Math.Round(total + (taxRate * total), 2);
 
             return grandTotal;
         }
@@ -42,7 +43,7 @@ namespace MidtermProject
                 }
             }
             double change = Math.Round(money - grandTotal, 2);
-            Console.WriteLine($"Thank you!\nYour change is: ${change}.");
+            Console.WriteLine($"Thank you!\nYour change is: ${change.ToString("F", CultureInfo.InvariantCulture)}."); // better $$ format? 
             return change;
 
         }
@@ -60,13 +61,16 @@ namespace MidtermProject
             }
             //Should we tell the user they enter a valid check number?
         }
-        public static void PayByCC()
+
+        public static string PayByCC()
         {
-            //Regex visaRegEx = new(@"^4[0-9]{12}(?:[0-9]{3})?$");
-            //Regex americanExpressRegEx = new(@"^3[47][0-9]{13}$");
-            //Regex masterCard = new(@"^5[1-5][0-9]{14}$");
-            //Regex monthYear = new(@"^(0[1-9]|1[0-2])\/?([0-9]{2})$");
-            //Regex cvv = new(@"^[0-9]{3,4}$");
+            string lastFour = "";
+            //Regex viasRegEx = new Regex(@"^4[0-9]{12}(?:[0-9]{3})?$");
+            //Regex americanExpressRegEx = new Regex(@"^3[47][0-9]{13}$");
+            //Regex monthYear = new Regex(@"^(0[1-9]|1[0-2])\/?([0-9]{2})$");
+            //Regex masterCard = new Regex(@"^5[1-5][0-9]{14}$");
+
+            Regex cvv = new Regex(@"^[0-9]{3,4}$");
             while (true)
             {
                 Console.WriteLine("Please enter a credit card number.");
@@ -74,20 +78,25 @@ namespace MidtermProject
 
                 if (Regex.IsMatch(creditCard, @"^4[0-9]{12}(?:[0-9]{3})?$"))
                 {
-                    Console.WriteLine("VISA");
+                    lastFour = $"x{creditCard.Substring(creditCard.Length - 4)} - VISA";
                     break;
+
                 }
 
                 else if (Regex.IsMatch(creditCard, @"^3[47][0-9]{13}$"))
                 {
-                    Console.WriteLine("AMEX");
+                    lastFour = $"x{creditCard.Substring(creditCard.Length - 4)} - AMEX";
                     break;
+
+
+
 
                 }
                 else if (Regex.IsMatch(creditCard, @"^5[1-5][0-9]{14}$"))
                 {
-                    Console.WriteLine("Mastercard");
+                    lastFour = $"x{creditCard.Substring(creditCard.Length - 4)} - MASTERCARD";
                     break;
+
                 }
                 else
                 {
@@ -103,6 +112,7 @@ namespace MidtermProject
                 {
                     Console.WriteLine("Valid");
                     break;
+
                 }
                 else
                 {
@@ -124,6 +134,7 @@ namespace MidtermProject
                     Console.WriteLine("Not Valid");
                 }
             }
+            return lastFour;
         }
         public static bool ContinueShopping() // just an option to have if we want 
         {
@@ -141,6 +152,7 @@ namespace MidtermProject
                 }
                 else if (checkOut == "n")
                 {
+                    Console.WriteLine("Have a great day!");
                     return false; // will set keepShopping bool to "false"
                 }
                 else if (checkOut == "menu")
@@ -166,7 +178,7 @@ namespace MidtermProject
         }
 
         public static void PrintReceipt(double total, double tax, double grandTotal,
-           List<Product> uniqueList, List<Product> shoppingCart, DateTime now, string paymentMethod, double change)
+           List<Product> uniqueList, List<Product> shoppingCart, DateTime now, string paymentMethod, double change, string lastFour)
 
         // this is a method because we didn't want this massive code block in main program. 
         {
@@ -182,12 +194,12 @@ namespace MidtermProject
                 int quantity = shoppingCart.Where(item => (item.Name).Equals(uniqueItem.Name)).Count();
                 Console.WriteLine($"{quantity} x {uniqueItem.Name} - ${uniqueItem.Price} each");
             }
-            Console.WriteLine($"\nTotal: ${total}\nTax: ${tax}\nGrand Total: ${grandTotal}");
-            Console.WriteLine($"Payment Method accepted: {paymentMethod}, {now}");
+            Console.WriteLine($"\nTotal: ${total.ToString("F", CultureInfo.InvariantCulture)}\nTax: ${tax.ToString("F", CultureInfo.InvariantCulture)}\nGrand Total: ${grandTotal.ToString("F", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"Payment Method accepted: {paymentMethod}  {lastFour}  {now}");
 
             if (paymentMethod == "Cash")
             {
-                Console.WriteLine($"Change: ${change}\n");
+                Console.WriteLine($"Change: ${change.ToString("F", CultureInfo.InvariantCulture)}\n");
             }
 
             Console.WriteLine(String.Format("{0,53}", "THANK YOU FOR SHOPPING AT"));
@@ -196,5 +208,6 @@ namespace MidtermProject
         }
     }
 }
+
 
 

@@ -8,13 +8,13 @@ double total = 0;
 const double taxRate = 0.06;
 double grandTotal = 0;
 var now = DateTime.Now;
-string paymentMethod = "";
 double change = 0;
 
 while (runProgram)
 {
     keepShopping = true;
-
+    string lastFour = "";
+    string paymentMethod = "";
     checkout = true;
 
     total = 0;
@@ -102,7 +102,7 @@ while (runProgram)
         if (input.Contains("1") || input.Contains("credit"))
         {
             paymentMethod = "Credit Card";
-            Transaction.PayByCC();
+            lastFour = Transaction.PayByCC();
             checkout = false;
         }
         else if (input.Contains("2") || input.Contains("check"))
@@ -129,7 +129,7 @@ while (runProgram)
     Console.WriteLine("Here's your receipt.\n\n");
 
     //just having fun with this method 
-    Transaction.PrintReceipt(total, tax, grandTotal, uniqueItems, shoppingCart, now, paymentMethod, change);
+    Transaction.PrintReceipt(total, tax, grandTotal, uniqueItems, shoppingCart, now, paymentMethod, change, lastFour);
 
     runProgram = Validator.Validator.GetContinue("Would you like to shop with us again?");
 
@@ -170,8 +170,7 @@ static int ChooseItem(List<Product> list)
         }
     }
     return choice;
-    // returns the list item # that user wants 
-    // will need to return choice - 1 to get list index :] 
+    
 }
 
 static int ChooseQuantity(ref List<Product> shoppingList, ref int userChoice) // int x is userFoodInput/userChoice for now
@@ -186,7 +185,7 @@ static int ChooseQuantity(ref List<Product> shoppingList, ref int userChoice) //
         }
         if (quantity < 1)
         {
-            Console.WriteLine("Not valid choices");
+            Console.WriteLine("Invalid Menu Option, please try again.");
         }
         else
         {
