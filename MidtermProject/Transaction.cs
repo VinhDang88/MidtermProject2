@@ -155,7 +155,7 @@ namespace MidtermProject
                 }
                 else if (checkOut == "n")
                 {
-                    Console.WriteLine("Have a great day!");
+                    
                     return false; // will set keepShopping bool to "false"
                 }
                 else if (checkOut == "menu")
@@ -205,7 +205,7 @@ namespace MidtermProject
                 Console.WriteLine($"Change: ${change.ToString("F", CultureInfo.InvariantCulture)}\n");
             }
 
-            Console.WriteLine(String.Format("{0,53}", "THANK YOU FOR SHOPPING AT"));
+            Console.WriteLine(String.Format("\n{0,53}", "THANK YOU FOR SHOPPING AT"));
             Console.WriteLine(String.Format("{0,46}", "TRADER JOSE'S"));
             Console.WriteLine(String.Format("{0,49}", "www.traderjoses.com\n"));
         }
